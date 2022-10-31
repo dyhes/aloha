@@ -2,8 +2,10 @@
 /// <reference path="../rnode-grpc-gen/js/rnode-grpc-js.d.ts" />
 // @ts-check
 
-import { signDeploy, rnodeDeploy, rnodePropose, getAddrFromPrivateKey } from '@tgrospic/rnode-grpc-js';
+//import { signDeploy, rnodeDeploy, rnodePropose, getAddrFromPrivateKey } from '@tgrospic/rnode-grpc-js';
 // requires --experimental-json-modules
+import pkg from '@tgrospic/rnode-grpc-js';
+const { signDeploy, rnodeDeploy, rnodePropose, getAddrFromPrivateKey } = pkg;
 import protoSchema from '../rnode-grpc-gen/js/pbjs_generated.json';
 import '../rnode-grpc-gen/js/DeployServiceV1_pb.js'; // proto global
 import '../rnode-grpc-gen/js/ProposeServiceV1_pb.js'; // proto global

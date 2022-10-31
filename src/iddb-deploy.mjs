@@ -10,7 +10,8 @@ import util from 'util';
 import { rnodeService } from './rnode-env.mjs';
 
 // Load .env file
-import { config } from 'dotenv';
+import pkg from 'dotenv';
+const { config } = pkg;
 config();
 
 /**
@@ -45,4 +46,5 @@ async function main(env, {fs, grpcLib}) {
   console.log(`Copy URI to .env file IDDB_CONTRACT_URI variable.`);
 };
 
-await main(process.env, {fs, grpcLib});
+
+main(process.env, {fs, grpcLib});

@@ -54,7 +54,7 @@ services:
       - ./data/redis:/data:rw
 
   zulip:
-    image: "zulip/docker-zulip:4.7-0"
+    image: "heslin/zulip"
     # build:
     #   context: .
     #   args:

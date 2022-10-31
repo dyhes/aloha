@@ -10,7 +10,7 @@ services:
 
   boot:
     << : *default-rnode
-    container_name: boot
+    container_name: boot_aloha
     command: run -s --validator-private-key $VALIDATOR_BOOT_PRIVATE --allow-private-addresses --host boot
               --protocol-port 40400 --discovery-port 40404
               --wallets-file /data-init/genesis/wallets.txt --bonds-file /data-init/genesis/bonds.txt
@@ -30,7 +30,7 @@ services:
 
   read:
     << : *default-rnode
-    container_name: read
+    container_name: read_aloha
     command: run -b $VALIDATOR_BOOT_ADDRESS --allow-private-addresses --host read --no-upnp
               --protocol-port 40410 --discovery-port 40414
               --approve-duration 10seconds --approve-interval 10seconds

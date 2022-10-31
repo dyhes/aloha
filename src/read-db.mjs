@@ -9,7 +9,8 @@ import util from 'util';
 import { rnodeService } from './rnode-env.mjs';
 
 // Load .env file
-import { config } from 'dotenv';
+import pkg from 'dotenv';
+const { config } = pkg;
 config();
 
 /**
@@ -52,7 +53,7 @@ async function main(env, {grpcLib}) {
     }
   `
 
-  const getMessage = id => `
+  const getMessage = (/** @type {number} */ id) => `
     new return,
       lookup(\`rho:registry:lookup\`)
     in {
@@ -80,4 +81,4 @@ async function main(env, {grpcLib}) {
   console.log('RESULT', util.inspect(result, {depth: 100, colors: true}))
 };
 
-await main(process.env, {grpcLib});
+main(process.env, {grpcLib});

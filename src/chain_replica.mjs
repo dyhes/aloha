@@ -9,7 +9,8 @@ import grpcLib from '@grpc/grpc-js'; //@@ AMBIENT
 import { rnodeService } from './rnode-env.mjs';
 
 // Load .env file
-import { config } from 'dotenv';
+import pkg from 'dotenv';
+const { config } = pkg;
 config();
 
 const harden = x => Object.freeze(x);  // ISSUE: @agoric/harden for deep-freeze?
@@ -69,7 +70,6 @@ async function mirror_events(sql, channel, queue) {
     queue.push(rho);
   });
 }
-
 
 function notice_as_rho({ op, table_name, OLD = undefined, NEW = undefined}) {
   // KLUDGE: replacing null with Nil in string form has false positives
@@ -205,7 +205,7 @@ function batchingQueue(
 
 
 /* global process, setTimeout, clearTimeout */
-await main(process.argv, process.env, {
+main(process.argv, process.env, {
   timer: {
     current_timestamp: () => Date.now(),
     setTimeout,
