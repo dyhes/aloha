@@ -1,77 +1,73 @@
 # Aloha
 
-## Goal
+## 所需
+* GIT
+* Docker-Compose
+* Node 14.4.0(推荐版本)
+* npm
 
-1. Extract chat messages from Zulip and store it on-chain.
-1. Read on-chain tables, keys and messages.
-1. Import messages to Zulip.
-
-## Install nodejs dependencies
+## 下载nodejs依赖
 
 ```sh
 npm install
 ```
 
-## Run local Zulip server with RChain nodes
+## 在本地运行RChain节点与Aloha服务器
 
-Control of the whole process is defined with `npm` scripts in [package.json](package.json).
+整个流程由[package.json](package.json)中的预定义指令操纵
 
-The first step is to start Zulip with its dependencies and RNode instances which will store on-chain data. Starting from fresh it will take a few minutes to complete. Check _docker-compose_ logs and web access for more info.
-
-_TODO: Read-only RNode is defined in configuration but not currently used. Additional info should be provided how to read exported on-chain data._
+通过`docker-compose`运行Aloha、RChain、Postgresql镜像
 
 ```sh
 npm run start-docker
 ```
 
-To control docker-compose services which includes both [docker-compose.yml](docker-compose.yml) and [docker-compose-zulip.yml](docker-compose-zulip.yml) this npm script can be used.
+查看镜像日志
 
 ```sh
-# Get logs from all containers
+# 查看所有镜像日志
 npm run dc -- logs -f
 
-# Get logs only from bootstrap RNode
+# 仅查看boot镜像日志
 npm run dc -- logs -f boot
 ```
 
-### Check when Zulip and RNode are started from the browser
+### 检查镜像是否运行成功
 
-Zulip: [https://localhost:1443/](https://localhost:1443/).  
+Aloha: [https://localhost:1443/](https://localhost:1443/).  
 RNode: [http://localhost:40403/status](http://localhost:40403/status).
 
-# Configure initial Zulip account (organization)
+（若运行出错可查看日志排查错误原因）
 
-To login to a locally started Zulip instance it's necessary to follow the Zulip procedure and create an organization with an initial account.
+## 初始化组织账号
 
-This command will print a temporary link to access the initial Zulip configuration. Follow the link, create your account and login to Zulip server.
+仅需在第一次启动时运行
 
 ```sh
 npm run zulip-gen-org-link
 ```
 
-## Configure smart contract to store chat messages
+## 部署智能合约
 
-This step is necessary to execute only once when RChain nodes are started from a fresh state.
-
-Creates a main contract with operations to insert DB data on-chain.
-
-**Result of these deploys will produce URI output which must be updated in [**.env**](.env) file.**
+仅需在第一次启动时运行
 
 ```sh
 npm run iddb-deploy
 ```
+将输出的uri复制到[**.env**](.env)文件相应位置
 
-After __.env__ file is updated with __IDDB_CONTRACT_URI__ execute command to create a contract for Zulip DB.
+当 __.env__ 文件中的 __IDDB_CONTRACT_URI__ 已经更新时，运行
 
 ```sh
 npm run myzulipdb-deploy
 ```
+同上，将输出的uri复制到[**.env**](.env)文件相应位置
 
-Update __DB_CONTRACT_URI__ in __.env__ file which is used as part of private channel for insert operations ([chain_replica.mjs](chain_replica.mjs)) and to get read-only channel for read operations ([read-db.mjs](read-db.mjs)).
+_提示: 每次重新运行`iddb-deploy` 和 `myzulipdb-deploy` 重新部署时需要重新更新 __.env__ 文件。_
 
-_NOTE: Whenever `iddb-deploy` and `myzulipdb-deploy` are deployed again the corresponding record in __.env__ file must be updated._
+## 链接Aloha服务器与RChain节点
 
-## Start JS script to process new messages from Zulip and import on-chain
+运行
 
 ```sh
 npm start
