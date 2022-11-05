@@ -67,8 +67,6 @@ _提示: 每次重新运行`iddb-deploy` 和 `myzulipdb-deploy` 重新部署时�
 
 ## 链接Aloha服务器与RChain节点
 
-运行
-
 ```sh
 npm start
 ```
