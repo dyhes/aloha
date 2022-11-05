@@ -1,6 +1,6 @@
 # Aloha
 
-## 所需
+## 所需环境
 * GIT
 * Docker-Compose
 * Node 14.4.0(推荐版本)
@@ -54,14 +54,14 @@ npm run zulip-gen-org-link
 ```sh
 npm run iddb-deploy
 ```
-将输出的uri复制到[**.env**](.env)文件相应位置
+将输出的uri赋值给[**.env**](.env)文件的 __IDDB_CONTRACT_URI__ 
 
 当 __.env__ 文件中的 __IDDB_CONTRACT_URI__ 已经更新时，运行
 
 ```sh
 npm run myzulipdb-deploy
 ```
-同上，将输出的uri复制到[**.env**](.env)文件相应位置
+同上，将输出的uri赋值给[**.env**](.env)文件的 __DB_CONTRACT_URI__
 
 _提示: 每次重新运行`iddb-deploy` 和 `myzulipdb-deploy` 重新部署时需要重新更新 __.env__ 文件。_
 
