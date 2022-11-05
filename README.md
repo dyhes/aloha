@@ -1,6 +1,4 @@
-# RChat - RChain support to decentralize chat (Zulip)
-
-Show case example how to make chat applications like Zulip decentralized with on-chain data.
+# Aloha
 
 ## Goal
 
@@ -77,29 +75,4 @@ _NOTE: Whenever `iddb-deploy` and `myzulipdb-deploy` are deployed again the corr
 
 ```sh
 npm start
-```
-
-## Run JS script to import on-chain messages to new Zulip instance
-
-When creating a new instance of Zulip, you can import on-chain messages by running these script. It will copy the data from obtained on-chain tables. 
-
-```sh
-npm run fill-zulipdb
-```
-
-_TODO: At the moment of this change, the function getTables (from on-chain) returns only zerver_message and zerver_usermessage tables, but there are a few more related to zerver_message such as zerver_userprofile. Copying those tables related to zerver_message could be an improvement to what it is done here._
-
-
-## Stop containers and clean data
-
-Stop and remove all containers (data stored on disk will not be touched).
-
-```sh
-npm run dc -- down
-```
-
-Delete all data on disk. `sudo` is needed because RNode uses _root_ user inside the container, so the mounted folder will be owned by _root_. 
-
-```sh
-sudo rm -R data
 ```
