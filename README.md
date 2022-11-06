@@ -34,8 +34,8 @@ npm run dc -- logs -f boot
 
 ### 检查镜像是否运行成功
 
-Aloha: [https://localhost:1443/](https://localhost:1443/).  
-RNode: [http://localhost:40403/status](http://localhost:40403/status).
+Aloha: [https://localhost:1443/](https://localhost:1443/)
+RNode: [http://localhost:40403/status](http://localhost:40403/status)
 
 （若运行出错可查看日志排查错误原因）
 
